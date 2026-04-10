@@ -5,14 +5,16 @@ import articlesRoutes from './routes/articles.routes.js';
 
 const app = express();
 
+// pour pouvoir lire le JSON dans les requêtes
 app.use(express.json());
 
-// Middleware de logs
+// middleware qui affiche la méthode et l'url de chaque requête
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
 
+// on branche les routes
 app.use('/authors', authorsRoutes);
 app.use('/articles', articlesRoutes);
 

@@ -8,18 +8,20 @@ export const getAuthors = (req, res) => {
 export const createAuthor = (req, res) => {
   const { name } = req.body;
 
+  // on vérifie que name est bien envoyé
   if (!name) {
     return res.status(400).json({ error: 'name obligatoire' });
   }
 
+  // on insère l'auteur dans la base et on retourne son id
   const result = db.prepare('INSERT INTO authors (name) VALUES (?)').run(name);
   res.status(201).json({ id: result.lastInsertRowid, name });
 };
 
-// Récupérer les articles d'un auteur
 export const getArticlesByAuthor = (req, res) => {
   const { id } = req.params;
 
+  // on vérifie que l'auteur existe
   const author = db.prepare('SELECT * FROM authors WHERE id = ?').get(id);
   if (!author) {
     return res.status(404).json({ error: 'auteur introuvable' });

@@ -1,9 +1,8 @@
-// Connexion à la base de données
 import Database from 'better-sqlite3';
 
 const db = new Database('database.db');
 
-// Création de la table authors
+// on crée la table authors si elle existe pas déjà
 db.exec(`
   CREATE TABLE IF NOT EXISTS authors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,7 +10,7 @@ db.exec(`
   )
 `);
 
-// Création de la table articles
+// on crée la table articles si elle existe pas déjà
 db.exec(`
   CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
