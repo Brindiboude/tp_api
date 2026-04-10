@@ -20,7 +20,7 @@ export const getArticleById = (req, res) => {
   `).get(req.params.id);
 
   if (!article) {
-    return res.status(404).json({ error: 'Article non trouvé' });
+    return res.status(404).json({ error: 'article introuvable' });
   }
   res.json(article);
 };
@@ -30,12 +30,12 @@ export const createArticle = (req, res) => {
   const { title, content, author_id } = req.body;
 
   if (!title || !content || !author_id) {
-    return res.status(400).json({ error: 'title, content et author_id sont obligatoires' });
+    return res.status(400).json({ error: 'champs manquants' });
   }
 
   const author = db.prepare('SELECT * FROM authors WHERE id = ?').get(author_id);
   if (!author) {
-    return res.status(404).json({ error: 'Auteur non trouvé' });
+    return res.status(404).json({ error: 'auteur introuvable' });
   }
 
   const result = db.prepare('INSERT INTO articles (title, content, author_id) VALUES (?, ?, ?)').run(title, content, author_id);
@@ -49,7 +49,7 @@ export const updateArticle = (req, res) => {
 
   const article = db.prepare('SELECT * FROM articles WHERE id = ?').get(id);
   if (!article) {
-    return res.status(404).json({ error: 'Article non trouvé' });
+    return res.status(404).json({ error: 'article introuvable' });
   }
 
   db.prepare('UPDATE articles SET title = ?, content = ?, author_id = ? WHERE id = ?').run(title, content, author_id, id);
@@ -62,9 +62,9 @@ export const deleteArticle = (req, res) => {
 
   const article = db.prepare('SELECT * FROM articles WHERE id = ?').get(id);
   if (!article) {
-    return res.status(404).json({ error: 'Article non trouvé' });
+    return res.status(404).json({ error: 'article introuvable' });
   }
 
   db.prepare('DELETE FROM articles WHERE id = ?').run(id);
-  res.json({ message: 'Article supprimé' });
+  res.json({ message: 'supprimé' });
 };
