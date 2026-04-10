@@ -1,14 +1,12 @@
 import express from 'express';
 import db from './db.js';
+import authorsRoutes from './routes/authors.routes.js';
 
 const app = express();
 
-// Middleware pour lire le JSON
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API en ligne');
-});
+app.use('/authors', authorsRoutes);
 
 app.listen(3000, () => {
   console.log('Serveur lancé sur le port 3000');
