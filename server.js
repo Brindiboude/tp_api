@@ -10,7 +10,7 @@ app.use(express.json());
 
 // middleware qui affiche la méthode et l'url de chaque requête
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
+  console.log(`${req.method} ${req.url}`); // affiche la méthode et l'url de chaque requête dans le terminal
   next();
 });
 

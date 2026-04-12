@@ -11,7 +11,7 @@ db.exec(`
 `);
 
 // on crée la table articles si elle existe pas déjà
-db.exec(`
+db.exec(` // Plus adapté pour créer des tables
   CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,

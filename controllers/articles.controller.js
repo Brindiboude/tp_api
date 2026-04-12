@@ -45,6 +45,7 @@ export const createArticle = (req, res) => {
     .prepare('INSERT INTO articles (title, content, author_id) VALUES (?, ?, ?)')
     .run(title, content, author_id);
 
+// plus lisible comme ça
   res.status(201).json({
     id: result.lastInsertRowid,
     title,
